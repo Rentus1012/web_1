@@ -1,0 +1,4 @@
+여러개를 가져오고 싶다면 getElementsByCalssName
+
+각자 가져오고 싶으면 getElementsByCalssName
+
