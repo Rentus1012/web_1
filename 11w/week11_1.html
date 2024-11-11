@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Ex</title>
+</head>
+<style>
+    li {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+    }
+</style>
+<script>
+    function change(obj) {
+        obj.innerHTML = "<h2>Text changed</h2>"; //text 바꾸기, html 부분에서 전달 인자를 하나 설정해주고, script 부분에서는 obj로 설정해서 만약 obj가 this 라면 소ㅑㄴ의 text가 바뀌는 이벤트를 설정.
+        t = document.createElement("img");
+        t.src = "http://loremflickr.com/300/200";
+        obj.appendChild(t);
+        y = document.getElementById("title");
+        y.style.color = "pink";
+
+    }
+    mover = function (obj) {
+        this.style.border = "1px solid rgb";
+        this.style.color = "green";
+        this.style.background = "lightgreen";
+        this.style.fontSize = "110%";
+    };
+    mout = function () {
+        this.style.border = "0px";
+        this.style.color = "black";
+        this.style.background = "white";
+        this.style.fontsize = "100%";
+        this.style.background="white;"
+    };
+    newover = function () {
+        this.style.background = "yellowgreen";
+    };
+    window.onload = function () {
+        //onload
+        let lists = document.getElementsByClassName("item");
+        for (let i = 0; i < lists.length; i++) {
+            //함수를 호출할건지 함술ㄹ 넣어줄건지 구분.()유무
+            lists[i].onmouseover = mover;//이벤트 등록
+            lists[i].onmouseout = mout;
+        }
+        //lists[3].addEventListener("mousrover", "newover");
+        lists[0].addEventListener("click", function() {
+            //혹시 위에 까지 가서 쓰기 싫다고 하면 이렇게 쓸수도 있음.
+            document.body.style.background = "lightgreen";
+        });
+
+    }
+</script>
+
+<body>
+    <section>
+        <li class="item">Item1-1</li>
+        <li class="item">Item1-2</li>
+        <li class="item">Item1-3</li>
+        <li class="item">Item1-4</li>
+        <li class="item">Item1-5</li>
+    </section>
+
+
+
+    <div onmouseover="this.style.background = 'green'" onmouseout="this.style.background='white'"
+        onclick="change(this)">title text</div>
+    <h4 id="title" onclick="this.style.fontSize='120%'">sub text</h4>
+
+
+</body>
+
+</html>
