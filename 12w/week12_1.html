@@ -1,0 +1,130 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마우스 이벤트</title>
+</head>
+<style>
+    div{
+        display:inline-black;
+    }
+</style>
+<script>
+    window.onload = function() {
+        document.body.oncontextmenu = function(){
+            alert("오른쪽 마우스 클릭 금지!");
+            return false;// 이거 안해놓으면 오른쪽 마우스 클릭 했을때 메뉴가 뜸.
+        }
+    }
+    function down(o){
+        o.style.fontstyle = "italic";
+    }
+    function up(o) {
+        o.style.fontstyle="normal";
+    }
+    function over(o) {
+        o.style.borderColor="violet";
+    }
+    function out(o) {
+        o.style.borderColor = "lightgray";
+    }
+    function wheel(o, e){
+        let w = 0;
+        if(e.wheelDelta < 0) {
+            w--;
+            if(w < 0) {
+            w =0;
+            }
+        }
+        
+        else {
+            w++;
+            o.style.borderStyle = "ridge";
+            o.style.borderWidth = w + "px";
+        }
+        
+
+    }
+    function move(e) {
+        let str;
+        str = "(x, y) = ("+ e.x+", "+e.y+")<br>";
+        str += "(clientX, clientY) = ("+ e.clientX+", "+e.clientY+")<br>";
+        str += "(screenX, screenY) = ("+ e.screenX+", "+e.screenY+")<br>";
+        str += "(offsetX, offsetY) = ("+ e.offsetX+", "+e.offsetY+")<br>";
+        let r = document.getElementById("wrap");
+        r.innerHTML = str;
+    }
+
+    let index = 0;
+
+    let images = [
+        "http://www.loremflickr.com/320/240",
+        "http://www.loremflickr.com/320/240/dog",
+        "http://www.loremflickr.com/320/240/paris"
+    ];
+
+    function change(o, e){
+        if(e.offsetX < 160){
+            index--;
+            if(index < 0) {
+                index += images.length;//만약 -1이면 그거의 이미지 수만큼 더함. 그러면 몇번으로 넘어오게??
+                //index = images.length-1 이렇게 해도 됨.
+                
+            }
+        }
+        else{
+            index++;
+            if(index >= images.length) {
+                index  = 0;
+            }
+        }
+        o.src = images[index]; // 바꿔
+    }
+
+
+
+
+
+
+</script>
+<body>
+
+    <h2>image gallery</h2>
+
+    <img id = "img" src="http://www.loremflickr.com/320/240"
+        style = "border: 2px ridge violet"
+        <!-- onclick="change(this, event)" -->
+        onmousemove = "move(event)">
+    >
+
+
+
+
+
+    <h2>마우스 이벤트</h2>
+    
+    <br>
+    
+    
+
+
+    <div onmousedown="down(this)" 
+        onmouseup="up(this)"
+        onmouseover="over(this)"
+        onmouseout="out(this)"
+        onmousewheel="wheel(this, event)"
+        >control me</div>
+
+
+    <hr>
+
+    <img src = "http://www.loremflickr.com/600/400"
+    onmousemove = "move(event)">
+    <div id = "wrap"></div>
+
+</body>
+</html>

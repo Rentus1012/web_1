@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function check(e){
+            let res = confirm("이동 여부. 확인 누르면 true, 그 반대는 반대값.");
+            if(!res) {
+                //값을 뒤집음.
+                e.preventDefault();//넘어가는걸 방해하는.
+            }
+            
+        }
+    </script>
+</head>
+<body>
+    <a href = "http://www.naver.com" onclick=check(event);>네이버</a>
+    <!--check()는 갈련지 아닌지에 대한 여부를 판단.-->
+</body>
+</html>
