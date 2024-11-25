@@ -1,0 +1,83 @@
+<!--브라우저 객체, 윈도우 객체-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer example</title>
+</head>
+<style>
+    section {
+        border: 2px solid green;
+        padding: 5px;
+
+    }
+    li {
+        display: inline-block;
+        width: 100px;
+        height: 70px;
+        border: 1px solid;
+        margin: 10px 10px;
+
+    }
+</style>
+<script>
+    let timer = null;
+    function setTime() {
+        setTimeout(function(){
+            location.href = "http://www.naver.com";
+        }, 20);
+    }
+    function releaseTime() {
+        if(timer != null) {
+            clearTimeout(timer);
+        }
+    }
+    /*-----------------------------------------------------*/
+
+    let timer2 = null;
+    let index = 0;
+    let pIndex = 0;
+
+    window.onload = function() {
+        let lis = document.getElementsByTagName("li");
+        pIndex = lis.length - 1;
+        timer2 = setInterval(function(){
+            lis[pIndex].style.background = "white";
+
+            for(i = 0; i <3;i++) {
+                let r = Math.floor(Math.random()* 255)
+                let g = Math.floor(Math.random()* 255)
+                let b = Math.floor(Math.random()* 255)
+            }
+            // let str = "rgb(255, 0, 0)";
+            let str = "rgb(" + r +"," + g +","+ b + ","+ ")";
+            
+
+            lis[index].style.background = "grey";
+            pIndex = index;
+            index++;
+            index = index % lis.length;
+        }, 20);
+    }
+</script>
+<body>
+    <h2>settimer 예제</h2>
+    <div
+        onmouseover = "setTime()"
+        onmouseout = "releaseTime()"
+    >네이버로 이동하기</div>
+
+
+
+    <br><br><br><br><br><br><br>
+    <section id = "sec">
+        <li id = "li1">List Item 1</li>
+        <li id = "li2">List Item 2</li>
+        <li id = "li3">List Item 3</li>
+        <li id = "li4">List Item 4</li>
+        <li id = "li5">List Item 5</li>
+    </section>
+</body>
+</html>

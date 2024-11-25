@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer Example</title>
+</head>
+<style>
+    section {
+        border: 2px solid green;
+        padding: 5px;
+    }
+    li {
+        display: inline-block;
+        width: 100px;
+        height: 70px;
+        border: 1px solid;
+        margin: 10px 10px;
+        text-align: center;
+        line-height: 70px;
+    }
+</style>
+<script>
+    let timer = null;
+    function setTime() {
+        setTimeout(function(){
+            location.href = "http://www.naver.com";
+        }, 2000);  // 2초 후에 네이버로 이동
+    }
+
+    function releaseTime() {
+        if (timer != null) {
+            clearTimeout(timer);
+        }
+    }
+
+    // Timer and index for changing list item background color
+    let timer2 = null;
+    let index = 0;
+    let pIndex = 0;
+    window.onload = function() {  // window.onload 사용
+        let lis = document.getElementsByTagName("li");  // 'getElementsByTagName' 사용
+        pIndex = lis.length - 1;
+
+        timer2 = setInterval(function() {
+            lis[pIndex].style.background = "white";  // 이전 항목을 흰색으로
+
+            // 랜덤 색상 생성
+            let r = Math.floor(Math.random() * 255);
+            let g = Math.floor(Math.random() * 255);
+            let b = Math.floor(Math.random() * 255);
+
+            // RGB 색상 문자열 만들기
+            let str = `rgb(${r}, ${g}, ${b})`;
+
+            lis[index].style.background = str;  // 새로운 색상 적용
+            pIndex = index;
+            index++;
+            index = index % lis.length;  // 리스트 순환
+        },1000);  // 1초마다 색상 변경
+    }
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     let lis = document.getElementsByTagName("li");  // 'getElementsByTagName'을 사용
+    //     pIndex = lis.length - 1;
+
+    //     timer2 = setInterval(function() {
+    //         lis[pIndex].style.background = "white";
+
+    //         // 랜덤 색상 생성
+    //         let r = Math.floor(Math.random() * 255);
+    //         let g = Math.floor(Math.random() * 255);
+    //         let b = Math.floor(Math.random() * 255);
+
+    //         // RGB 색상 문자열 만들기
+    //         let str = `rgb(${r}, ${g}, ${b})`;
+
+    //         lis[index].style.background = str;  // 새로운 색상 적용
+    //         pIndex = index;
+    //         index++;
+    //         index = index % lis.length;  // 리스트 순환
+    //     }, 200);  // 1초마다 색상 변경
+    // });
+</script>
+<body>
+    <h2>setTimer 예제</h2>
+    <div
+        onmouseover="setTime()"
+        onmouseout="releaseTime()"
+    >
+        네이버로 이동하기
+    </div>
+
+    <br><br><br><br><br><br><br>
+    <section id="sec">
+        <li id="li1">List Item 1</li>
+        <li id="li2">List Item 2</li>
+        <li id="li3">List Item 3</li>
+        <li id="li4">List Item 4</li>
+        <li id="li5">List Item 5</li>
+    </section>
+
+
+    <div id = "submenu" style = "visibility: visible;">
+        <li>Link1</li>
+        <li>Link2</li>
+        <li>Link3</li>
+        <li>Link4</li>
+</body>
+</html>

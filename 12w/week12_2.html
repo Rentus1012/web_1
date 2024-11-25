@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Element Test</title>
+</head>
+<script>
+    function checkID(o) {
+        let t = document.getElementById("inInfo");
+        if (o.value == "") {
+
+            t.innerHTML = "ID는 필수요소 입니다.";
+            t.style.color = "red";
+            o.focus();//칸을 입력 안하면 못나가게
+
+        }
+        else {
+            t.innerHTML = "";
+        }
+    }
+</script>
+
+<body>
+    <form method="GET" action="week12_1.html"><!--겟을 하면 url에 안보임-->
+        
+        <fieldset>
+            <legend>로그인</legend>
+            ID <input type="text" onblur="checkID(this)"><span id="inInfo"></span><br>
+            PASS <input type="password"><span id="psInfo"></span><br>
+            <!-- 만약 빈 요소가 있으면 그걸 무조건 적으라고... -->
+        </fieldset>
+        <script>
+            function calc() {
+                let exp = document.getElementById("sik").value;
+                let r = eval(exp);//eval 이용해서 계산
+                document.getElementById("result").value = r;
+            }
+            function rcheck() {
+                rds = document.getElementsByName("food");
+                //라디오와 체크박스 참고(예제 9-17)
+                for(i = 0; i < rds.length; i++) {
+                    if(rds[i].checked == true) {
+                        console.log(rds[i].value);
+                    }
+                }
+            }
+
+            let total = 0;
+            function comp(o) {
+                let v = parseInt(o.value); // 이걸 해줘야 문자열로 더해지는것이 아니라 숫자로 더해짐.
+                if(this.checked = true) {
+                    total += v;
+                }
+                else
+                    total -= v;
+
+                    document.getElementById("total").value = total;
+            }
+
+            function change(o) {
+                console.log(o.value);
+                console.log(o.selectedIndex); //선택되어있는 값.
+
+                let i = o.value;
+                let img = document.getElementById("image");//이미지가 저장 되어있는 요소를 택함.
+                img.src = i;//바꿔
+                //img.width = "200px"; //이거 안됨.
+                img.setAttribute("width", "200px"); //이건 됨.
+            }
+        </script>
+        <fieldset>
+            <legend>계산기 예재</legend>
+            <p>수식 <input type="text" id = "sik">
+                <input type="button" value="계산하기" onclick="calc()"></p>
+            <p>결과: <input type="text" id="result"></p><!--지금 같은 경우는 어떻게 계산 할수 없음. eval 함수를 이용. -->
+        </fieldset>
+
+
+        <fieldset>
+            <legend>radio button</legend>
+            <label><input type="radio" name="food" value="korea">한식</label>
+            <label><input type="radio" name="food" value="china" checked>중식</label>
+            <label><input type="radio" name="food" value="japan">일식</label>
+            <input type="button" value="선택 확인" onclick="rcheck()">
+        </fieldset>
+
+
+
+
+        <fieldset>
+            <legend>물품 가격 출력</legend><!--prod[]를 이용해서 배열에 저장.-->
+            <label><input type="checkbox" value="10000" name="prod[]"
+                onclick="comp(this)">모자(1만원)</label>
+            <label><input type="checkbox" value="10000" name="prod[]"
+                onclick="comp(this)">가방(1만원)</label>
+            <label><input type="checkbox" value="10000" name="prod[]"
+                onclick="comp(this)">신발(1만원)</label>
+            
+            <p> 총 금액: <input type="text" id ="total" value="0"></p>
+        </fieldset>
+
+
+
+        <input type="color"
+            onchange="document.body.style.backgroundColor = this.value">
+    </form>
+
+
+    <fieldset>
+        <legend>image Drawing</legend>
+        <!--select>option*3-->
+        <select name="" id="sel" onchange="change(this)">
+            <option value="koala.jpg">코알라</option>
+            <option value="desert.jpg">사막</option>
+            <option value="peng.jpg">펭귄</option>
+        </select>
+        <img src = "koala.jpg" width = "100" id = "image">
+    </fieldset>
+</body>
+
+</html>
+
+
+<!--예재 9-21은 직접 해보기 chap09-->
+
